@@ -5,7 +5,7 @@ servcies:
  -docker
 
 before_install:
- -docker build -t vdwivedi/react-test -f Dockerfile.dev ./client/Dockerfile.dev ./client
+ -docker build -t vdwivedi/react-test -f  ./client/Dockerfile.dev ./client
 
 script:
  -docker run -e CI=true vdwivedi/react-test npm test
