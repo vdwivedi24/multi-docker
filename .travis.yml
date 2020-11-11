@@ -10,10 +10,14 @@ before_install:
 script:
  -docker run -e CI=true vdwivedi/react-test npm test
 
-after_success:
+after_success: 
  -docker build -t vdwivedi/multi-client ./client
  -docker build -t vdwivedi/multi-nginx ./nginx
  -docker build -t vdwivedi/multi-server ./server
  -docker build -t vdwivedi/multi-worker ./worker
 
-
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push vdwivedi/multi-client
+  - docker push vdwivedi/multi-nginx
+  - docker push vdwivedi/multi-server
+  - docker push vdwivedi/multi-worker
